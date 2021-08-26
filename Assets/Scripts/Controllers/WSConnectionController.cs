@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using WebSocketSharp;
 
-public class WSConnectionController : MonoBehaviour
+public class WSConnectionController : Singleton<WSConnectionController>
 {
     [System.Serializable]
     private class CYAPlayerInfo
@@ -32,11 +32,10 @@ public class WSConnectionController : MonoBehaviour
         public string auth;        
     }
 
-
     private const string HttpURL = "https://open.cyalive.co";
     private const string SocketURL = "wss://opensocket.cyalive.co";
 
-    private WebSocket ws = null;
+    private WebSocket webSocket = null;
     private string WebSocketConnectionToken = string.Empty;
     private CYAPlayerInfo cyaPlayer = new CYAPlayerInfo();
 
@@ -50,13 +49,14 @@ public class WSConnectionController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (ws == null)
+        // DEBUG USE
+        if (webSocket == null)
         {
             return;
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ws.Send("Hello");
+            webSocket.Send("Hello");
         }
     }
 
@@ -67,7 +67,7 @@ public class WSConnectionController : MonoBehaviour
         unityWebRequest.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
         unityWebRequest.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         unityWebRequest.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        unityWebRequest.SetRequestHeader("Authorization", "1");
+        unityWebRequest.SetRequestHeader("Authorization", "0");
 
         //Send the request then wait here until it return
         yield return unityWebRequest.SendWebRequest();
@@ -81,20 +81,19 @@ public class WSConnectionController : MonoBehaviour
             TokenResult result = JsonUtility.FromJson<TokenResult>(unityWebRequest.downloadHandler.text);
             this.cyaPlayer.token = "bearer " + result.auth;
             this.WebSocketConnectionToken = result.token;
-            //Debug.Log(result.token);
 
-            ws = new WebSocket(SocketURL + "/ws?token=" + this.WebSocketConnectionToken);
+            webSocket = new WebSocket(SocketURL + "/ws?token=" + this.WebSocketConnectionToken);
             
-            ws.OnOpen += (sender, e) =>
+            webSocket.OnOpen += (sender, e) =>
             {
                 Debug.Log("Socket opened");
             };
-            ws.OnMessage += (sender, e) =>
+            webSocket.OnMessage += (sender, e) =>
             {
                 Debug.Log("Message Received from " + ((WebSocket)sender).Url + ", Data : " + e.Data);
             };
 
-            ws.Connect();
+            webSocket.Connect();
 
         }
     }
