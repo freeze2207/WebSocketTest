@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class DrawingController : Singleton<DrawingController>
 {
+    public enum DrawingModes
+    {
+        EDRAW_CREATE,
+        EDRAW_UPDATE,
+    }
+
     // UI
     public Button ClearBtn;
     public Dropdown ColorDropDown;
@@ -22,6 +28,7 @@ public class DrawingController : Singleton<DrawingController>
     // Start is called before the first frame update
     void Start()
     {
+        this.mCanDraw = (GameplayController.Instance.GetCurrentGameState() == GameplayController.GameStates.EGAME_DRAW);
         ClearBtn.onClick.AddListener(CleanUpLines);
         GameplayController.Instance.GameStateChanged.AddListener(ChangeDrawingState);
     }
@@ -50,7 +57,7 @@ public class DrawingController : Singleton<DrawingController>
         if(Input.GetMouseButton(0))
         {
             Vector2 hitPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (Vector2.Distance(hitPosition, mCurrentLinePoints[mCurrentLinePoints.Count - 1]) > 0.1f)
+            if (Vector2.Distance(hitPosition, mCurrentLinePoints[mCurrentLinePoints.Count - 1]) > 0.5f)
             {
                 UpdateLine(hitPosition);
             }
@@ -71,6 +78,8 @@ public class DrawingController : Singleton<DrawingController>
         mCurrentLinePoints.Add(currentPoint);
         mLineRenderer.SetPosition(0, mCurrentLinePoints[0]);
         mLineRenderer.SetPosition(1, mCurrentLinePoints[1]);
+
+        WSConnectionController.Instance.SyncDrawing(DrawingModes.EDRAW_CREATE, currentPoint);
     }
 
     private void UpdateLine(Vector2 _newPoint)
@@ -80,6 +89,8 @@ public class DrawingController : Singleton<DrawingController>
         mLineRenderer.SetPosition(mLineRenderer.positionCount - 1, _newPoint);
 
         // Sync with all client here
+        WSConnectionController.Instance.SyncDrawing(DrawingModes.EDRAW_UPDATE, _newPoint);
+
     }
 
     private void CleanUpLines()

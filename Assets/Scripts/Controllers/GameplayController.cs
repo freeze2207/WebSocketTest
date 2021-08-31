@@ -11,10 +11,11 @@ public class GameplayController : Singleton<GameplayController>
         EGAME_GUESS,
         EGAME_SPEC,
     }
+    // DEBUG_USE toggle between
+    public bool mIsMaster = false;
+    public GameStates gameState = GameStates.EGAME_SPEC;
 
-    private bool mIsMaster = false;
-    private GameStates gameState = GameStates.EGAME_SPEC;
-
+    [System.Serializable]
     public class GameStateChangedEvent : UnityEvent<GameStates> { }
     public GameStateChangedEvent GameStateChanged;
 
@@ -22,12 +23,17 @@ public class GameplayController : Singleton<GameplayController>
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public GameStates GetCurrentGameState()
+    {
+        return this.gameState;
     }
 }

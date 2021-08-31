@@ -10,8 +10,6 @@ public class GuessingController : Singleton<GuessingController>
 
     private bool mCanGuess = false;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
