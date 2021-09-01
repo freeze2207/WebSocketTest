@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Networking;
 using WebSocketSharp;
 
@@ -53,6 +54,17 @@ public class WSConnectionController : Singleton<WSConnectionController>
         public string val;
     }
 
+    [System.Serializable]
+    private class SyncResponse
+    {
+        public string appKey;
+        public string command;
+        public Payload payload; 
+    }
+
+    [System.Serializable]
+    private class ResponseReceived : UnityEvent<Payload> { }
+
     private const string HttpURL = "https://open.cyalive.co";
     private const string SocketURL = "wss://opensocket.cyalive.co";
 
@@ -60,12 +72,17 @@ public class WSConnectionController : Singleton<WSConnectionController>
     private string WebSocketConnectionToken = string.Empty;
     private CYAPlayerInfo cyaPlayer = null;
 
+    private ResponseReceived syncResponseReceived;
+
     // Start is called before the first frame update
     private void Start()
     {
         this.cyaPlayer = new CYAPlayerInfo(true, "aasjdhjkj123", "zzh_test", System.Guid.NewGuid().ToString());
         string JSONString = JsonUtility.ToJson(this.cyaPlayer);
         StartCoroutine(PostRequest(HttpURL + "/v2/gen", JSONString));
+
+        this.syncResponseReceived = new ResponseReceived();
+        this.syncResponseReceived.AddListener(HandleResponse);
     }
 
     private IEnumerator PostRequest(string url, string body, string token = "0")
@@ -96,9 +113,10 @@ public class WSConnectionController : Singleton<WSConnectionController>
             };
             this.mWebSocket.OnMessage += (sender, e) =>
             {
-                // catch those sync message
-                
+                // catch sync message
                 Debug.Log(" Data : " + e.Data);
+                SyncResponse response = JsonUtility.FromJson<SyncResponse>(e.Data);
+                syncResponseReceived.Invoke(response.payload);
             };
 
             this.mWebSocket.Connect();
@@ -137,13 +155,63 @@ public class WSConnectionController : Singleton<WSConnectionController>
         unityWebRequest.Dispose();
     }
 
+    public void SyncDrawing(DrawingController.DrawingModes _mode)
+    {
+        if (_mode != DrawingController.DrawingModes.EDRAW_CLEAN)
+        {
+            return;
+        }
+
+        SendCommandRequest newCommand = new SendCommandRequest();
+        newCommand.command = "draw_clean";
+        newCommand.key = "cleanup";
+        newCommand.val = "0";
+        StartCoroutine(SyncRequest(HttpURL + "/v2/bc/set", JsonUtility.ToJson(newCommand), this.cyaPlayer.token));
+    }
 
     public void SyncDrawing(DrawingController.DrawingModes _mode, Vector2 _position)
     {
+        if (_mode == DrawingController.DrawingModes.EDRAW_CLEAN)
+        {
+            return;
+        }
+
         SendCommandRequest newCommand = new SendCommandRequest();
         newCommand.command = _mode == DrawingController.DrawingModes.EDRAW_CREATE ? "draw_create" : "draw_update";
         newCommand.key = "coordinates";
         newCommand.val = _position.x + "," + _position.y;
         StartCoroutine(SyncRequest(HttpURL + "/v2/bc/set", JsonUtility.ToJson(newCommand), this.cyaPlayer.token));
+    }
+
+
+    private void HandleResponse(Payload _payload)
+    {
+        /*if (_payload.player == this.cyaPlayer.playerId)
+        {
+            return;
+        }*/
+        if (_payload.key != "coordinates" && _payload.key != "cleanup")
+        {
+            Debug.Log("Wrong key");
+            return;
+        }
+        string[] coordinates = _payload.val.Split(',');
+        Vector2 point = new Vector2(System.Convert.ToSingle(coordinates[0]), System.Convert.ToSingle(coordinates[1]));
+
+        switch (_payload.command)
+        {
+            case "draw_create":
+                DrawingController.Instance.SyncCreateLine(point);
+                break;
+            case "draw_update":
+                DrawingController.Instance.SyncUpdateLine(point);
+                break;
+            case "draw_clean":
+                DrawingController.Instance.SyncCleanUp();
+                break;
+            default:
+                Debug.Log("Invalid command");
+                break;
+        }
     }
 }

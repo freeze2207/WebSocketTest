@@ -15,11 +15,11 @@ D:/GameDev/WebSocketTest
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50511
+58743
 Successfully changed project path to: D:/GameDev/WebSocketTest
 D:/GameDev/WebSocketTest
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 41.16 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 42.04 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.1.4f1 (4cd64a618c1b)
 [Subsystems] Discovering subsystems at path D:/Unity/Editor/2021.1.4f1/Editor/Data/Resources/UnitySubsystems
@@ -35,376 +35,297 @@ Initialize mono
 Mono path[0] = 'D:/Unity/Editor/2021.1.4f1/Editor/Data/Managed'
 Mono path[1] = 'D:/Unity/Editor/2021.1.4f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'D:/Unity/Editor/2021.1.4f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56832
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56404
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
+Register platform support module: D:/Unity/Editor/2021.1.4f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: D:/Unity/Editor/2021.1.4f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.000868 seconds.
+Registered in 0.001154 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 42.09 ms, found 3 plugins.
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 41.76 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.049 seconds
+- Completed reload, in  1.118 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.003588 seconds.
+Registered in 0.003447 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 39.39 ms, found 3 plugins.
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 40.13 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 DisplayProgressbar: Restoring NuGet Packages
-System.TypeInitializationException: The type initializer for 'Unity.Burst.Editor.BurstReflection' threw an exception. ---> UnityEditor.Compilation.PrecompiledAssemblyException: Multiple precompiled assemblies with the same name Newtonsoft.Json.dll included on the current platform. Only one assembly with the same name is allowed per platform.
-  at UnityEditor.Scripting.ScriptCompilation.PrecompiledAssemblyProvider.ValidateAndGetNameToPrecompiledAssembly (UnityEditor.Scripting.ScriptCompilation.PrecompiledAssembly[] precompiledAssemblies) [0x00108] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Scripting.ScriptCompilation.PrecompiledAssemblyProvider.GetPrecompiledAssembliesDictionary (System.Boolean isEditor, UnityEditor.BuildTargetGroup buildTargetGroup, UnityEditor.BuildTarget buildTarget) [0x00028] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetScriptAssemblies (UnityEditor.Scripting.ScriptCompilation.IEditorCompilation editorCompilation, UnityEditor.Scripting.ScriptCompilation.EditorScriptCompilationOptions options) [0x00023] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetScriptAssemblies (UnityEditor.Scripting.ScriptCompilation.IEditorCompilation editorCompilation, UnityEditor.Compilation.AssembliesType assembliesType) [0x00056] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetAssemblies (UnityEditor.Scripting.ScriptCompilation.EditorCompilation editorCompilation, UnityEditor.Compilation.AssembliesType assembliesType) [0x00001] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetAssemblies (UnityEditor.Compilation.AssembliesType assembliesType) [0x00006] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at Unity.Burst.Editor.BurstReflection..cctor () [0x00030] in D:\GameDev\WebSocketTest\Library\PackageCache\com.unity.burst@1.4.1\Editor\BurstReflection.cs:617 
-   --- End of inner exception stack trace ---
-  at Unity.Burst.Editor.BurstLoader..cctor () [0x00166] in D:\GameDev\WebSocketTest\Library\PackageCache\com.unity.burst@1.4.1\Editor\BurstLoader.cs:146 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
 Mono: successfully reloaded assembly
-- Completed reload, in  1.401 seconds
+- Completed reload, in  1.962 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 0.43 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2391 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 109.2 MB.
-System memory in use after: 109.4 MB.
-
-Unloading 36 unused Assets to reduce memory usage. Loaded Objects now: 2843.
-Total: 3.072600 ms (FindLiveObjects: 0.175500 ms CreateObjectMapping: 0.078100 ms MarkObjects: 2.730500 ms  DeleteObjects: 0.087700 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/NuGet.config
-  artifactKey: Guid(921dab63fb61943c0a2d20fa946c1bf0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/NuGet.config using Guid(921dab63fb61943c0a2d20fa946c1bf0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b2f671b6170578d199747bccbfaac901') in 0.125683 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000262 seconds.
-  path: Assets/packages.config
-  artifactKey: Guid(a30fdc024ae6f43e6b4d2d2c47d2467b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/packages.config using Guid(a30fdc024ae6f43e6b4d2d2c47d2467b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ed4e90fa7b0034d81d02f8a3008fd5aa') in 0.001674 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 2.210289 seconds.
-  path: Assets/Packages/WebSocketSharp-netstandard.1.0.1
-  artifactKey: Guid(f5fb0bf45bb184a25b310319a8cba08c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Packages/WebSocketSharp-netstandard.1.0.1 using Guid(f5fb0bf45bb184a25b310319a8cba08c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b6edb2c37396b5a4cb1613dbfdd83b16') in 0.001677 seconds 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.003412 seconds.
-Begin MonoManager ReloadAssembly
-PrecompiledAssemblyException: Multiple precompiled assemblies with the same name Newtonsoft.Json.dll included on the current platform. Only one assembly with the same name is allowed per platform.
-  at UnityEditor.Scripting.ScriptCompilation.PrecompiledAssemblyProvider.ValidateAndGetNameToPrecompiledAssembly (UnityEditor.Scripting.ScriptCompilation.PrecompiledAssembly[] precompiledAssemblies) [0x00108] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Scripting.ScriptCompilation.PrecompiledAssemblyProvider.GetPrecompiledAssembliesDictionary (System.Boolean isEditor, UnityEditor.BuildTargetGroup buildTargetGroup, UnityEditor.BuildTarget buildTarget) [0x00028] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetScriptAssemblies (UnityEditor.Scripting.ScriptCompilation.IEditorCompilation editorCompilation, UnityEditor.Scripting.ScriptCompilation.EditorScriptCompilationOptions options) [0x00023] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetScriptAssemblies (UnityEditor.Scripting.ScriptCompilation.IEditorCompilation editorCompilation, UnityEditor.Compilation.AssembliesType assembliesType) [0x00056] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetAssemblies (UnityEditor.Scripting.ScriptCompilation.EditorCompilation editorCompilation, UnityEditor.Compilation.AssembliesType assembliesType) [0x00001] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetAssemblies (UnityEditor.Compilation.AssembliesType assembliesType) [0x00006] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at Unity.Burst.Editor.BurstReflection..cctor () [0x00030] in D:\GameDev\WebSocketTest\Library\PackageCache\com.unity.burst@1.4.1\Editor\BurstReflection.cs:617 
-Rethrow as TypeInitializationException: The type initializer for 'Unity.Burst.Editor.BurstReflection' threw an exception.
-  at Unity.Burst.Editor.BurstLoader..cctor () [0x00166] in D:\GameDev\WebSocketTest\Library\PackageCache\com.unity.burst@1.4.1\Editor\BurstLoader.cs:146 
-Rethrow as TypeInitializationException: The type initializer for 'Unity.Burst.Editor.BurstLoader' threw an exception.
-  at (wrapper delegate-invoke) <Module>.invoke_void_object_EventArgs(object,System.EventArgs)
-  at System.AppDomain.DoDomainUnload () [0x00008] in <695d1cc93cca45069c528c15c9fdd749>:0 
-
-(Filename: Library/PackageCache/com.unity.burst@1.4.1/Editor/BurstReflection.cs Line: 617)
-
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.44 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-System.TypeInitializationException: The type initializer for 'Unity.Burst.Editor.BurstReflection' threw an exception. ---> UnityEditor.Compilation.PrecompiledAssemblyException: Multiple precompiled assemblies with the same name Newtonsoft.Json.dll included on the current platform. Only one assembly with the same name is allowed per platform.
-  at UnityEditor.Scripting.ScriptCompilation.PrecompiledAssemblyProvider.ValidateAndGetNameToPrecompiledAssembly (UnityEditor.Scripting.ScriptCompilation.PrecompiledAssembly[] precompiledAssemblies) [0x00108] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Scripting.ScriptCompilation.PrecompiledAssemblyProvider.GetPrecompiledAssembliesDictionary (System.Boolean isEditor, UnityEditor.BuildTargetGroup buildTargetGroup, UnityEditor.BuildTarget buildTarget) [0x00028] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetScriptAssemblies (UnityEditor.Scripting.ScriptCompilation.IEditorCompilation editorCompilation, UnityEditor.Scripting.ScriptCompilation.EditorScriptCompilationOptions options) [0x00023] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetScriptAssemblies (UnityEditor.Scripting.ScriptCompilation.IEditorCompilation editorCompilation, UnityEditor.Compilation.AssembliesType assembliesType) [0x00056] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetAssemblies (UnityEditor.Scripting.ScriptCompilation.EditorCompilation editorCompilation, UnityEditor.Compilation.AssembliesType assembliesType) [0x00001] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetAssemblies (UnityEditor.Compilation.AssembliesType assembliesType) [0x00006] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at Unity.Burst.Editor.BurstReflection..cctor () [0x00030] in D:\GameDev\WebSocketTest\Library\PackageCache\com.unity.burst@1.4.1\Editor\BurstReflection.cs:617 
-   --- End of inner exception stack trace ---
-  at Unity.Burst.Editor.BurstLoader..cctor () [0x00166] in D:\GameDev\WebSocketTest\Library\PackageCache\com.unity.burst@1.4.1\Editor\BurstLoader.cs:146 
-UnityEngine.StackTraceUtility:ExtractStackTrace ()
-UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
-UnityEngine.Logger:Log (UnityEngine.LogType,object)
-UnityEngine.Debug:LogError (object)
-UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.212 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.54 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2380 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 108.6 MB.
-System memory in use after: 108.9 MB.
-
-Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 2848.
-Total: 3.276700 ms (FindLiveObjects: 0.199300 ms CreateObjectMapping: 0.185500 ms MarkObjects: 2.870900 ms  DeleteObjects: 0.020300 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.003208 seconds.
-Begin MonoManager ReloadAssembly
-PrecompiledAssemblyException: Multiple precompiled assemblies with the same name Newtonsoft.Json.dll included on the current platform. Only one assembly with the same name is allowed per platform.
-  at UnityEditor.Scripting.ScriptCompilation.PrecompiledAssemblyProvider.ValidateAndGetNameToPrecompiledAssembly (UnityEditor.Scripting.ScriptCompilation.PrecompiledAssembly[] precompiledAssemblies) [0x00108] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Scripting.ScriptCompilation.PrecompiledAssemblyProvider.GetPrecompiledAssembliesDictionary (System.Boolean isEditor, UnityEditor.BuildTargetGroup buildTargetGroup, UnityEditor.BuildTarget buildTarget) [0x00028] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetScriptAssemblies (UnityEditor.Scripting.ScriptCompilation.IEditorCompilation editorCompilation, UnityEditor.Scripting.ScriptCompilation.EditorScriptCompilationOptions options) [0x00023] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetScriptAssemblies (UnityEditor.Scripting.ScriptCompilation.IEditorCompilation editorCompilation, UnityEditor.Compilation.AssembliesType assembliesType) [0x00056] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetAssemblies (UnityEditor.Scripting.ScriptCompilation.EditorCompilation editorCompilation, UnityEditor.Compilation.AssembliesType assembliesType) [0x00001] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at UnityEditor.Compilation.CompilationPipeline.GetAssemblies (UnityEditor.Compilation.AssembliesType assembliesType) [0x00006] in <cbc56ce48ec645d2beabdfed6b9ae8ee>:0 
-  at Unity.Burst.Editor.BurstReflection..cctor () [0x00030] in D:\GameDev\WebSocketTest\Library\PackageCache\com.unity.burst@1.4.1\Editor\BurstReflection.cs:617 
-Rethrow as TypeInitializationException: The type initializer for 'Unity.Burst.Editor.BurstReflection' threw an exception.
-  at Unity.Burst.Editor.BurstLoader..cctor () [0x00166] in D:\GameDev\WebSocketTest\Library\PackageCache\com.unity.burst@1.4.1\Editor\BurstLoader.cs:146 
-Rethrow as TypeInitializationException: The type initializer for 'Unity.Burst.Editor.BurstLoader' threw an exception.
-  at (wrapper delegate-invoke) <Module>.invoke_void_object_EventArgs(object,System.EventArgs)
-  at System.AppDomain.DoDomainUnload () [0x00008] in <695d1cc93cca45069c528c15c9fdd749>:0 
-
-(Filename: Library/PackageCache/com.unity.burst@1.4.1/Editor/BurstReflection.cs Line: 617)
-
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.47 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.755 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.44 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 108.7 MB.
-System memory in use after: 108.9 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2853.
-Total: 3.225700 ms (FindLiveObjects: 0.165300 ms CreateObjectMapping: 0.087400 ms MarkObjects: 2.952000 ms  DeleteObjects: 0.019900 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.003526 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.08 seconds
 Refreshing native plugins compatible for Editor in 0.46 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
+Unloading 2390 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 109.0 MB.
+System memory in use after: 109.2 MB.
 
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.295 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.55 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 108.8 MB.
-System memory in use after: 109.0 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2858.
-Total: 3.308400 ms (FindLiveObjects: 0.173300 ms CreateObjectMapping: 0.081800 ms MarkObjects: 3.037300 ms  DeleteObjects: 0.015200 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.003312 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.48 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.427 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.45 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 108.8 MB.
-System memory in use after: 109.0 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2863.
-Total: 3.134000 ms (FindLiveObjects: 0.180700 ms CreateObjectMapping: 0.090500 ms MarkObjects: 2.846000 ms  DeleteObjects: 0.016000 ms)
+Unloading 35 unused Assets to reduce memory usage. Loaded Objects now: 2842.
+Total: 3.494300 ms (FindLiveObjects: 0.193600 ms CreateObjectMapping: 0.127700 ms MarkObjects: 3.106800 ms  DeleteObjects: 0.065200 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 143.414411 seconds.
   path: Assets/Scripts/Controllers/DrawingController.cs
   artifactKey: Guid(3bb7f772bd0c07d419e46ba34713752a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Controllers/DrawingController.cs using Guid(3bb7f772bd0c07d419e46ba34713752a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '26d0c2fd2009ae81bd7209276c6f788f') in 0.010349 seconds 
+Start importing Assets/Scripts/Controllers/DrawingController.cs using Guid(3bb7f772bd0c07d419e46ba34713752a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '486af4c80f1945a6a6952e9fb61b43fb') in 0.033051 seconds 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.003201 seconds.
+Registered in 0.004013 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
 Refreshing native plugins compatible for Editor in 0.45 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
 Mono: successfully reloaded assembly
-- Completed reload, in  1.393 seconds
+- Completed reload, in  1.395 seconds
 Platform modules already initialized, skipping
 Refreshing native plugins compatible for Editor in 0.46 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 108.7 MB.
-System memory in use after: 108.9 MB.
+System memory in use before: 108.4 MB.
+System memory in use after: 108.6 MB.
 
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2868.
-Total: 3.123900 ms (FindLiveObjects: 0.192400 ms CreateObjectMapping: 0.096100 ms MarkObjects: 2.817800 ms  DeleteObjects: 0.016600 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.003040 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.44 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.279 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.65 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 108.7 MB.
-System memory in use after: 108.9 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2873.
-Total: 3.638400 ms (FindLiveObjects: 0.175200 ms CreateObjectMapping: 0.083000 ms MarkObjects: 3.363500 ms  DeleteObjects: 0.016000 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 68.741633 seconds.
-  path: Assets/packages.config
-  artifactKey: Guid(a30fdc024ae6f43e6b4d2d2c47d2467b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/packages.config using Guid(a30fdc024ae6f43e6b4d2d2c47d2467b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b1dabf298a581f6b053aa0870cb3545') in 0.013090 seconds 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.003128 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.44 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.298 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.44 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 108.7 MB.
-System memory in use after: 108.9 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2878.
-Total: 2.975400 ms (FindLiveObjects: 0.175800 ms CreateObjectMapping: 0.083600 ms MarkObjects: 2.700400 ms  DeleteObjects: 0.014700 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 202.612562 seconds.
-  path: Packages/com.unity.mathematics
-  artifactKey: Guid(795e97ad99e2f6ffd2060ae1983b6f25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.unity.mathematics using Guid(795e97ad99e2f6ffd2060ae1983b6f25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1f94b738046e83abf898bf69e9013f7') in 0.005368 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 1.068660 seconds.
-  path: Packages/com.unity.nuget.newtonsoft-json
-  artifactKey: Guid(7e7d2b05dd6ea119ce16861d56d99a82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.unity.nuget.newtonsoft-json using Guid(7e7d2b05dd6ea119ce16861d56d99a82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd43bf84da6bf10ad3cc84b67c6fbc3b8') in 0.002784 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 59.156043 seconds.
-  path: Packages/com.unity.jobs
-  artifactKey: Guid(fde449d8005a4ce1d01f1832041cba2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.unity.jobs using Guid(fde449d8005a4ce1d01f1832041cba2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '801915eced07d56d232f73521e53af3c') in 0.002142 seconds 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.003242 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.44 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
-Mono: successfully reloaded assembly
-- Completed reload, in  1.278 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.43 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 108.7 MB.
-System memory in use after: 109.0 MB.
-
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2883.
-Total: 3.249000 ms (FindLiveObjects: 0.177700 ms CreateObjectMapping: 0.082700 ms MarkObjects: 2.952400 ms  DeleteObjects: 0.035600 ms)
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2847.
+Total: 3.065800 ms (FindLiveObjects: 0.205700 ms CreateObjectMapping: 0.104000 ms MarkObjects: 2.731100 ms  DeleteObjects: 0.023300 ms)
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.003254 seconds.
+Registered in 0.003151 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.44 ms, found 3 plugins.
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.45 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
-The assembly search path `D:/GameDev/WebSocketTest/Assets/Packages/Newtonsoft.Json.13.0.1/lib/netstandard2.0` does not exist
-at <empty>:line 0
-
 Mono: successfully reloaded assembly
-- Completed reload, in  1.304 seconds
+- Completed reload, in  1.322 seconds
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.43 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 0.50 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 108.7 MB.
-System memory in use after: 109.0 MB.
+System memory in use before: 108.4 MB.
+System memory in use after: 108.6 MB.
 
-Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2888.
-Total: 3.307100 ms (FindLiveObjects: 0.243800 ms CreateObjectMapping: 0.106600 ms MarkObjects: 2.941100 ms  DeleteObjects: 0.014900 ms)
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2852.
+Total: 2.962800 ms (FindLiveObjects: 0.178400 ms CreateObjectMapping: 0.085800 ms MarkObjects: 2.679300 ms  DeleteObjects: 0.018600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003924 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.46 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.360 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.46 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 108.5 MB.
+System memory in use after: 108.7 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2857.
+Total: 3.621800 ms (FindLiveObjects: 0.175500 ms CreateObjectMapping: 0.119500 ms MarkObjects: 3.311200 ms  DeleteObjects: 0.014600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003136 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.48 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.344 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.52 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 108.5 MB.
+System memory in use after: 108.7 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2862.
+Total: 3.372700 ms (FindLiveObjects: 0.178900 ms CreateObjectMapping: 0.079200 ms MarkObjects: 3.097900 ms  DeleteObjects: 0.015900 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003122 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.46 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.307 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.47 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 108.5 MB.
+System memory in use after: 108.7 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2867.
+Total: 3.295800 ms (FindLiveObjects: 0.184100 ms CreateObjectMapping: 0.093800 ms MarkObjects: 2.999600 ms  DeleteObjects: 0.017500 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003114 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.45 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.334 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.44 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 108.5 MB.
+System memory in use after: 108.8 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2872.
+Total: 2.619300 ms (FindLiveObjects: 0.170100 ms CreateObjectMapping: 0.095200 ms MarkObjects: 2.337200 ms  DeleteObjects: 0.015700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003377 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.44 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.353 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.44 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 108.5 MB.
+System memory in use after: 108.8 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2877.
+Total: 3.473400 ms (FindLiveObjects: 0.170800 ms CreateObjectMapping: 0.076300 ms MarkObjects: 3.210300 ms  DeleteObjects: 0.015400 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003298 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.44 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.299 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.44 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 108.6 MB.
+System memory in use after: 108.8 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2882.
+Total: 3.403200 ms (FindLiveObjects: 0.171700 ms CreateObjectMapping: 0.071800 ms MarkObjects: 3.144300 ms  DeleteObjects: 0.014700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003204 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.52 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.351 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.45 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 108.6 MB.
+System memory in use after: 108.8 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2887.
+Total: 3.016000 ms (FindLiveObjects: 0.183800 ms CreateObjectMapping: 0.083400 ms MarkObjects: 2.732100 ms  DeleteObjects: 0.015700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003403 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.45 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.340 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.47 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 108.6 MB.
+System memory in use after: 108.8 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2892.
+Total: 3.047100 ms (FindLiveObjects: 0.158600 ms CreateObjectMapping: 0.078900 ms MarkObjects: 2.791200 ms  DeleteObjects: 0.017800 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003217 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.75 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.300 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.42 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 108.6 MB.
+System memory in use after: 108.8 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2897.
+Total: 3.431800 ms (FindLiveObjects: 0.175200 ms CreateObjectMapping: 0.089500 ms MarkObjects: 3.145600 ms  DeleteObjects: 0.020800 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003218 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.45 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.405 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.47 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2379 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 108.6 MB.
+System memory in use after: 108.8 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 2902.
+Total: 2.937100 ms (FindLiveObjects: 0.172100 ms CreateObjectMapping: 0.089200 ms MarkObjects: 2.654700 ms  DeleteObjects: 0.020000 ms)
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file
