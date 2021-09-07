@@ -17,7 +17,6 @@ public class WSConnectionController : Singleton<WSConnectionController>
         public string spotId;
         public string username;
         public string playerId;
-        public HashSet<string> commandHandlers;
         public string token;
 
         public CYAPlayerInfo(bool _isMod, string _spotId, string _usename, string _playerId)
@@ -64,31 +63,36 @@ public class WSConnectionController : Singleton<WSConnectionController>
         public Payload payload; 
     }
 
-    [System.Serializable]
-    private class ResponseReceived : UnityEvent<Payload> { }
-
-    private enum ConnectionEnv
+    public enum ConnectionEnv
     {
         EProduction,
         EDev,
     }
 
-    private const string HttpURL = "https://open.cyalive.co";
+    // CONST
+    private const string DevHttpURL = "https://open.cyalive.co";
+    private const string HttpURL = "https://open.cya.live";
     private const string SocketURL = "wss://opensocket.cyalive.co";
+    
+    // ENV
+    public ConnectionEnv mEnv = ConnectionEnv.EDev;
 
-    private ConnectionEnv mEnv = ConnectionEnv.EDev;
-
+    // Connection
     private WebSocket mWebSocket = null;
-    private string WebSocketConnectionToken = string.Empty;
     private CYAPlayerInfo cyaPlayer = null;
-
-    private Queue<Payload> mPayloadQueue;
-
+    
+    // Development
+    private string mWebSocketConnectionToken = string.Empty;
+    // Production
     private string mProductionToken = string.Empty;
-    private bool mIsConnectionReady = false;
 
-    // Debug use
-    public Text text;
+    // Data / Payload
+    private Queue<Payload> mPayloadQueue;
+    
+    // Runtime 
+    private bool mIsConnectionReady = false;
+    public UnityEvent ConnectionStatusChanged = new UnityEvent();
+
 
     // Start is called before the first frame update
     private void Start()
@@ -97,6 +101,12 @@ public class WSConnectionController : Singleton<WSConnectionController>
 
         this.cyaPlayer = new CYAPlayerInfo(true, "aasjdhjkj123", "zzh_test", System.Guid.NewGuid().ToString());
 
+        if (this.mEnv == ConnectionEnv.EDev)
+        {
+            string JSONString = JsonUtility.ToJson(this.cyaPlayer);
+            StartCoroutine(PostRequest(DevHttpURL + "/v2/gen", JSONString));
+            this.ConnectionStatusChanged.Invoke();
+        }
     }
 
     private void Update()
@@ -112,16 +122,14 @@ public class WSConnectionController : Singleton<WSConnectionController>
 
     public void SetToken(string _token)
     {
-        this.mProductionToken = _token;
+        this.mProductionToken = "bearer " + _token;
 
         if (this.mProductionToken != string.Empty)
         {
             this.mEnv = ConnectionEnv.EProduction;
-            /*string JSONString = JsonUtility.ToJson(this.cyaPlayer);
-            StartCoroutine(PostRequest(HttpURL + "/v2/gen", JSONString));*/
-
         }
         this.mIsConnectionReady = true;
+        this.ConnectionStatusChanged.Invoke();
     }
 
     private IEnumerator PostRequest(string url, string body, string token = "0")
@@ -131,20 +139,17 @@ public class WSConnectionController : Singleton<WSConnectionController>
         unityWebRequest.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         unityWebRequest.SetRequestHeader("Content-Type", "application/json");
         unityWebRequest.SetRequestHeader("Authorization", token);
-        this.text.text = "before send,";
+
         //Send the request then wait here until it return
         yield return unityWebRequest.SendWebRequest();
-
-        this.text.text += " received,";
 
         if (unityWebRequest.result == UnityWebRequest.Result.ConnectionError)
         {
             Debug.Log("Error while sending connection request: " + unityWebRequest.error);
-            this.text.text += " connection error,";
         }
         else
         {
-            // Production
+            // Production [currently not using]
             if (this.mEnv == ConnectionEnv.EProduction)
             {
                 this.cyaPlayer.token = "bearer " + this.mProductionToken;
@@ -155,12 +160,9 @@ public class WSConnectionController : Singleton<WSConnectionController>
             {
                 TokenResult result = JsonUtility.FromJson<TokenResult>(unityWebRequest.downloadHandler.text);
                 this.cyaPlayer.token = "bearer " + result.auth;
-                this.WebSocketConnectionToken = result.token;
+                this.mWebSocketConnectionToken = result.token;
 
-                this.mWebSocket = new WebSocket(SocketURL + "/ws?token=" + this.WebSocketConnectionToken);
-
-                this.text.text += " before WS connect,";
-                this.text.text = this.WebSocketConnectionToken;
+                this.mWebSocket = new WebSocket(SocketURL + "/ws?token=" + this.mWebSocketConnectionToken);
 
                 this.mWebSocket.OnOpen += (sender, e) =>
                 {
@@ -174,25 +176,10 @@ public class WSConnectionController : Singleton<WSConnectionController>
                 };
 
                 this.mWebSocket.Connect();
-                // Send start a game message
-
-                this.text.text += " WS after con,";
-
-                // Keep connected
-                //StartCoroutine(KeepPinging());
             }
         }
         unityWebRequest.Dispose();
     }
-
-    /*private IEnumerator KeepPinging()
-    {
-        while(true)
-        {
-            this.mWebSocket.Send("Ping");
-            yield return new WaitForSeconds(2.5f);
-        }
-    }*/
 
     private IEnumerator SyncRequest(string url, string body, string token = "0")
     {
@@ -233,11 +220,12 @@ public class WSConnectionController : Singleton<WSConnectionController>
             return;
         }
 
+        string url = this.mEnv == ConnectionEnv.EDev ? DevHttpURL : HttpURL;
         SendCommandRequest newCommand = new SendCommandRequest();
         newCommand.command = "draw_clean";
         newCommand.key = "cleanup";
-        newCommand.val = "0,0";
-        StartCoroutine(SyncRequest(HttpURL + "/v2/bc/set", JsonUtility.ToJson(newCommand), this.cyaPlayer.token));
+        newCommand.val = "[0,0]";
+        StartCoroutine(SyncRequest(url + "/v2/bc/set", JsonUtility.ToJson(newCommand), this.mEnv == ConnectionEnv.EProduction ? this.mProductionToken : this.cyaPlayer.token));
     }
 
     // Draw sync
@@ -248,6 +236,7 @@ public class WSConnectionController : Singleton<WSConnectionController>
             return;
         }
 
+        string url = this.mEnv == ConnectionEnv.EDev ? DevHttpURL : HttpURL;
         SendCommandRequest newCommand = new SendCommandRequest();
         newCommand.command = "draw_create";
         newCommand.key = "coordinates";
@@ -256,10 +245,10 @@ public class WSConnectionController : Singleton<WSConnectionController>
             newCommand.val += "[" + point.x + "," + point.y + "]";
         }
 
-        StartCoroutine(SyncRequest(HttpURL + "/v2/bc/set", JsonUtility.ToJson(newCommand), this.cyaPlayer.token));
+        StartCoroutine(SyncRequest(url + "/v2/bc/set", JsonUtility.ToJson(newCommand), this.mEnv == ConnectionEnv.EProduction ? this.mProductionToken : this.cyaPlayer.token));
     }
 
-
+    // Handle messages
     private void HandleResponse(Payload _payload)
     {
         /*if (_payload.player == this.cyaPlayer.playerId)

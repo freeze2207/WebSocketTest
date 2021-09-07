@@ -153,7 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mIsMaster: 0
-  gameState: 0
   GameStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -414,6 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClearBtn: {fileID: 1032443594}
   ColorDropDown: {fileID: 1769001059}
+  Sensitivity: 0.4
   mLinePrefab: {fileID: 7616507707514761742, guid: d3cd47a05b8ca264d81331a900572185, type: 3}
   mDrawingPanel: {fileID: 1043167690}
 --- !u!1 &338666131
@@ -1974,7 +1974,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd0c45864ef04fbdac70c950dfa42a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 392951019}
+  mEnv: 0
+  ConnectionStatusChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1249871990
 Transform:
   m_ObjectHideFlags: 0

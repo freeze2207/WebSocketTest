@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GuessingController : Singleton<GuessingController>
 {
-
     // Controller
     [SerializeField] private GameObject mGuessingPanel;
 
@@ -14,12 +13,6 @@ public class GuessingController : Singleton<GuessingController>
     void Start()
     {
         GameplayController.Instance.GameStateChanged.AddListener(ChangeGuessState);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void ChangeGuessState(GameplayController.GameStates _state)

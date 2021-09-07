@@ -16,9 +16,11 @@ public class DrawingController : Singleton<DrawingController>
     public Dropdown ColorDropDown;
 
     // Controller
+    public float Sensitivity = 0.4f;
     [SerializeField] private GameObject mLinePrefab;
     [SerializeField] private GameObject mDrawingPanel;
 
+    // Runtime
     private bool mCanDraw = false;
     private GameObject mCurrentLine;
     private LineRenderer mLineRenderer;
@@ -59,7 +61,7 @@ public class DrawingController : Singleton<DrawingController>
             if (mCurrentLinePoints.Count > 0)
             {
                 Vector2 hitPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                if (Vector2.Distance(hitPosition, mCurrentLinePoints[mCurrentLinePoints.Count - 1]) > 0.5f)
+                if (Vector2.Distance(hitPosition, mCurrentLinePoints[mCurrentLinePoints.Count - 1]) > this.Sensitivity)
                 {
                     this.UpdateLine(hitPosition);
                 }
@@ -69,55 +71,33 @@ public class DrawingController : Singleton<DrawingController>
         // release the left click mouse
         if (Input.GetMouseButtonUp(0))
         {
-            /*this.mCurrentLine = GameObject.Instantiate(mLinePrefab, Vector3.zero, Quaternion.identity);
-            this.mLineRenderer = mCurrentLine.GetComponent<LineRenderer>();
-            this.mAllExistingLines.Add(this.mCurrentLine);
-            this.mLineRenderer.positionCount = this.mCurrentLinePoints.Count;
-            for (int i = 0; i < this.mCurrentLinePoints.Count; i++)
-            {
-                this.mLineRenderer.SetPosition(i, this.mCurrentLinePoints[i]);
-            }*/
-
-            WSConnectionController.Instance.text.text = "left click released";
-
             WSConnectionController.Instance.SyncDrawing(DrawingModes.EDRAW_CREATE, this.mCurrentLinePoints);
         }
-
         
     }
 
     private void CreateLine()
     {
-        /*this.mCurrentLine = GameObject.Instantiate(mLinePrefab, Vector3.zero, Quaternion.identity);
-        this.mLineRenderer = mCurrentLine.GetComponent<LineRenderer>();
         this.mCurrentLinePoints.Clear();
-        this.mCurrentLines.Add(mCurrentLine);
+        this.mCurrentLine = GameObject.Instantiate(mLinePrefab, Vector3.zero, Quaternion.identity);
+        this.mLineRenderer = mCurrentLine.GetComponent<LineRenderer>();
+        this.mAllExistingLines.Add(mCurrentLine);
 
         Vector2 currentPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         this.mCurrentLinePoints.Add(currentPoint);
         this.mCurrentLinePoints.Add(currentPoint);
         this.mLineRenderer.SetPosition(0, mCurrentLinePoints[0]);
-        this.mLineRenderer.SetPosition(1, mCurrentLinePoints[1]);*/
+        this.mLineRenderer.SetPosition(1, mCurrentLinePoints[1]);
 
-        // Sync with all client here
-        //WSConnectionController.Instance.SyncDrawing(DrawingModes.EDRAW_CREATE, currentPoint);
-
-        //WSConnectionController.Instance.SyncDrawing(DrawingModes.EDRAW_CREATE, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        this.mCurrentLinePoints.Clear();
-        Vector2 currentPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         this.mCurrentLinePoints.Add(currentPoint);
 
     }
 
     private void UpdateLine(Vector2 _newPoint)
     {
-        /*this.mCurrentLinePoints.Add(_newPoint);
-        this.mLineRenderer.positionCount++;
-        this.mLineRenderer.SetPosition(this.mLineRenderer.positionCount - 1, _newPoint);*/
-
-        // Sync with all client here
-        //WSConnectionController.Instance.SyncDrawing(DrawingModes.EDRAW_UPDATE, _newPoint);
         this.mCurrentLinePoints.Add(_newPoint);
+        this.mLineRenderer.positionCount++;
+        this.mLineRenderer.SetPosition(this.mLineRenderer.positionCount - 1, _newPoint);
     }
 
     private void CleanUpLines()
@@ -134,16 +114,6 @@ public class DrawingController : Singleton<DrawingController>
 
     public void SyncCreateLine(List<Vector2> _points)
     {
-        /*this.mCurrentLine = GameObject.Instantiate(mLinePrefab, Vector3.zero, Quaternion.identity);
-        this.mLineRenderer = mCurrentLine.GetComponent<LineRenderer>();
-        this.mCurrentLinePoints.Clear();
-        this.mAllExistingLines.Add(mCurrentLine);
-
-        this.mCurrentLinePoints.Add(_pointToCreate);
-        this.mCurrentLinePoints.Add(_pointToCreate);
-        this.mLineRenderer.SetPosition(0, mCurrentLinePoints[0]);
-        this.mLineRenderer.SetPosition(1, mCurrentLinePoints[1]);*/
-
         this.mCurrentLine = GameObject.Instantiate(mLinePrefab, Vector3.zero, Quaternion.identity);
         this.mLineRenderer = mCurrentLine.GetComponent<LineRenderer>();
         this.mAllExistingLines.Add(this.mCurrentLine);
@@ -154,17 +124,6 @@ public class DrawingController : Singleton<DrawingController>
         {
             this.mLineRenderer.SetPosition(i, this.mCurrentLinePoints[i]);
         }
-    }
-
-    public void SyncUpdateLine(Vector2 _newPoint)
-    {
-        if (this.mCurrentLine == null)
-        {
-            return;
-        }
-        this.mCurrentLinePoints.Add(_newPoint);
-        this.mLineRenderer.positionCount++;
-        this.mLineRenderer.SetPosition(this.mLineRenderer.positionCount - 1, _newPoint);
     }
 
     public void SyncCleanUp()

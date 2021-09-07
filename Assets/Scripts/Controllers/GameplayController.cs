@@ -7,33 +7,35 @@ public class GameplayController : Singleton<GameplayController>
 {
     public enum GameStates
     {
+        EGAME_NOTREADY,
         EGAME_DRAW,
         EGAME_GUESS,
         EGAME_SPEC,
     }
     // DEBUG_USE toggle between
     public bool mIsMaster = false;
-    public GameStates gameState = GameStates.EGAME_SPEC;
+    private GameStates mGameState = GameStates.EGAME_NOTREADY;
 
     [System.Serializable]
     public class GameStateChangedEvent : UnityEvent<GameStates> { }
     public GameStateChangedEvent GameStateChanged;
 
-
     // Start is called before the first frame update
     void Start()
     {
-
+        WSConnectionController.Instance.ConnectionStatusChanged.AddListener(ChageGameState);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ChageGameState()
     {
-        
+        this.mGameState = GameStates.EGAME_DRAW;
+        GameStateChanged.Invoke(this.mGameState);
     }
 
     public GameStates GetCurrentGameState()
     {
-        return this.gameState;
+        return this.mGameState;
     }
+
+
 }
