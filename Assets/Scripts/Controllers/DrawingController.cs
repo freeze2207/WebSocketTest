@@ -8,6 +8,7 @@ public class DrawingController : Singleton<DrawingController>
     public enum DrawingModes
     {
         EDRAW_CREATE,
+        EDRAW_CHANGECOLOR,
         EDRAW_CLEAN,
     }
 
@@ -19,6 +20,7 @@ public class DrawingController : Singleton<DrawingController>
     public float Sensitivity = 0.4f;
     [SerializeField] private GameObject mLinePrefab;
     [SerializeField] private GameObject mDrawingPanel;
+    [SerializeField] private List<Material> mColorMatList;
 
     // Runtime
     private bool mCanDraw = false;
@@ -31,7 +33,11 @@ public class DrawingController : Singleton<DrawingController>
     void Start()
     {
         this.mCanDraw = (GameplayController.Instance.GetCurrentGameState() == GameplayController.GameStates.EGAME_DRAW) && (WSConnectionController.Instance.GetConnectionStatus());
-        ClearBtn.onClick.AddListener(CleanUpLines);
+        this.ClearBtn.onClick.AddListener(CleanUpLines);
+        this.ColorDropDown.onValueChanged.AddListener(delegate { this.ColorChanged(this.ColorDropDown); });
+
+        this.mLinePrefab.GetComponent<LineRenderer>().material = this.mColorMatList[0];
+
         GameplayController.Instance.GameStateChanged.AddListener(ChangeDrawingState);
     }
 
@@ -74,6 +80,18 @@ public class DrawingController : Singleton<DrawingController>
             WSConnectionController.Instance.SyncDrawing(DrawingModes.EDRAW_CREATE, this.mCurrentLinePoints);
         }
         
+    }
+
+    // use Same index with mColorMatList
+    private void ColorChanged(Dropdown change)
+    {
+        if (this.mColorMatList[change.value] != null)
+        {
+            this.mLinePrefab.GetComponent<LineRenderer>().material = this.mColorMatList[change.value];
+        }
+
+        // Send color changed sync
+        WSConnectionController.Instance.SyncColor(DrawingModes.EDRAW_CHANGECOLOR, change.options[change.value].text);
     }
 
     private void CreateLine()
@@ -123,6 +141,15 @@ public class DrawingController : Singleton<DrawingController>
         for (int i = 0; i < this.mCurrentLinePoints.Count; i++)
         {
             this.mLineRenderer.SetPosition(i, this.mCurrentLinePoints[i]);
+        }
+    }
+
+    public void SyncColor(string _color)
+    {
+        int index = this.ColorDropDown.options.FindIndex(x => x.text.Equals(_color));
+        if (index != -1)
+        {
+            this.mLinePrefab.GetComponent<LineRenderer>().material = this.mColorMatList[index];
         }
     }
 

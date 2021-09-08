@@ -228,6 +228,21 @@ public class WSConnectionController : Singleton<WSConnectionController>
         StartCoroutine(SyncRequest(url + "/v2/bc/set", JsonUtility.ToJson(newCommand), this.mEnv == ConnectionEnv.EProduction ? this.mProductionToken : this.cyaPlayer.token));
     }
 
+    public void SyncColor(DrawingController.DrawingModes _mode, string _color)
+    {
+        if (_mode != DrawingController.DrawingModes.EDRAW_CHANGECOLOR)
+        {
+            return;
+        }
+
+        string url = this.mEnv == ConnectionEnv.EDev ? DevHttpURL : HttpURL;
+        SendCommandRequest newCommand = new SendCommandRequest();
+        newCommand.command = "draw_change_color";
+        newCommand.key = "color";
+        newCommand.val = _color;
+        StartCoroutine(SyncRequest(url + "/v2/bc/set", JsonUtility.ToJson(newCommand), this.mEnv == ConnectionEnv.EProduction ? this.mProductionToken : this.cyaPlayer.token));
+    }
+
     // Draw sync
     public void SyncDrawing(DrawingController.DrawingModes _mode, List<Vector2> _points)
     {
@@ -251,26 +266,29 @@ public class WSConnectionController : Singleton<WSConnectionController>
     // Handle messages
     private void HandleResponse(Payload _payload)
     {
-        /*if (_payload.player == this.cyaPlayer.playerId)
+        if (_payload.player == this.cyaPlayer.playerId)
         {
             return;
-        }*/
-        if (_payload.key != "coordinates" && _payload.key != "cleanup")
+        }
+        if (_payload.key != "coordinates" && _payload.key != "cleanup" && _payload.key != "color")
         {
             Debug.Log("Wrong key");
             return;
         }
 
         List<Vector2> points = new List<Vector2>();
-        string[] coordinates = _payload.val.Split('[', ']');
-        foreach (string coordinate in coordinates)
+        if (_payload.key == "coordinates")
         {
-            if (coordinate.Length == 0)
+            string[] coordinates = _payload.val.Split('[', ']');
+            foreach (string coordinate in coordinates)
             {
-                continue;
+                if (coordinate.Length == 0)
+                {
+                    continue;
+                }
+                string[] pointString = coordinate.Split(',');
+                points.Add(new Vector2(System.Convert.ToSingle(pointString[0]), System.Convert.ToSingle(pointString[1])));
             }
-            string[] pointString = coordinate.Split(',');
-            points.Add(new Vector2(System.Convert.ToSingle(pointString[0]), System.Convert.ToSingle(pointString[1])));
         }
 
         switch (_payload.command)
@@ -280,6 +298,9 @@ public class WSConnectionController : Singleton<WSConnectionController>
                 break;
             case "draw_clean":
                 DrawingController.Instance.SyncCleanUp();
+                break;
+            case "draw_change_color":
+                DrawingController.Instance.SyncColor(_payload.val);
                 break;
             default:
                 Debug.Log("Invalid command");
