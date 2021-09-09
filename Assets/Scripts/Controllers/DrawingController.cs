@@ -24,10 +24,16 @@ public class DrawingController : Singleton<DrawingController>
 
     // Runtime
     private bool mCanDraw = false;
+    private string mCurrentColor;
+
     private GameObject mCurrentLine;
     private LineRenderer mLineRenderer;
-    private string mCurrentColor;
     private List<Vector2> mCurrentLinePoints = new List<Vector2>();
+
+    private GameObject mCurrentSyncLine;
+    private LineRenderer mSyncLineRenderer;
+    private List<Vector2> mCurrentSyncLinePoints = new List<Vector2>();
+
     private List<GameObject> mAllExistingLines = new List<GameObject>();
 
     // Start is called before the first frame update
@@ -93,9 +99,6 @@ public class DrawingController : Singleton<DrawingController>
             this.mCurrentColor = change.options[change.value].text;
         }
 
-
-        // Send color changed sync
-        //WSConnectionController.Instance.SyncColor(DrawingModes.EDRAW_CHANGECOLOR, change.options[change.value].text);
     }
 
     private void CreateLine()
@@ -110,9 +113,6 @@ public class DrawingController : Singleton<DrawingController>
         this.mCurrentLinePoints.Add(currentPoint);
         this.mLineRenderer.SetPosition(0, mCurrentLinePoints[0]);
         this.mLineRenderer.SetPosition(1, mCurrentLinePoints[1]);
-
-        this.mCurrentLinePoints.Add(currentPoint);
-
     }
 
     private void UpdateLine(Vector2 _newPoint)
@@ -136,30 +136,22 @@ public class DrawingController : Singleton<DrawingController>
 
     public void SyncCreateLine(List<Vector2> _points, string _color)
     {
+        this.mCurrentSyncLine = GameObject.Instantiate(mLinePrefab, Vector3.zero, Quaternion.identity);
+        this.mSyncLineRenderer = mCurrentSyncLine.GetComponent<LineRenderer>();
+        this.mCurrentSyncLinePoints = _points;
+
         int index = this.ColorDropDown.options.FindIndex(x => x.text.Equals(_color));
         if (index != -1)
         {
-            this.mLinePrefab.GetComponent<LineRenderer>().material = this.mColorMatList[index];
+            this.mSyncLineRenderer.material = this.mColorMatList[index];
         }
 
-        this.mCurrentLine = GameObject.Instantiate(mLinePrefab, Vector3.zero, Quaternion.identity);
-        this.mLineRenderer = mCurrentLine.GetComponent<LineRenderer>();
-        this.mAllExistingLines.Add(this.mCurrentLine);
-        this.mCurrentLinePoints = _points;
+        this.mAllExistingLines.Add(this.mCurrentSyncLine);
 
-        this.mLineRenderer.positionCount = this.mCurrentLinePoints.Count;
-        for (int i = 0; i < this.mCurrentLinePoints.Count; i++)
+        this.mSyncLineRenderer.positionCount = this.mCurrentSyncLinePoints.Count;
+        for (int i = 0; i < this.mCurrentSyncLinePoints.Count; i++)
         {
-            this.mLineRenderer.SetPosition(i, this.mCurrentLinePoints[i]);
-        }
-    }
-
-    public void SyncColor(string _color)
-    {
-        int index = this.ColorDropDown.options.FindIndex(x => x.text.Equals(_color));
-        if (index != -1)
-        {
-            this.mLinePrefab.GetComponent<LineRenderer>().material = this.mColorMatList[index];
+            this.mSyncLineRenderer.SetPosition(i, this.mCurrentSyncLinePoints[i]);
         }
     }
 
@@ -175,5 +167,6 @@ public class DrawingController : Singleton<DrawingController>
         }
         this.mAllExistingLines.Clear();
         this.mCurrentLine = null;
+        this.mCurrentSyncLine = null;
     }
 }

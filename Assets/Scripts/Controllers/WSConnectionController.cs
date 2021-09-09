@@ -225,21 +225,6 @@ public class WSConnectionController : Singleton<WSConnectionController>
         StartCoroutine(SyncRequest(url + "/v2/bc/set", JsonUtility.ToJson(newCommand), this.mEnv == ConnectionEnv.EProduction ? this.mProductionToken : this.cyaPlayer.token));
     }
 
-    public void SyncColor(DrawingController.DrawingModes _mode, string _color)
-    {
-        if (_mode != DrawingController.DrawingModes.EDRAW_CHANGECOLOR)
-        {
-            return;
-        }
-
-        string url = this.mEnv == ConnectionEnv.EDev ? DevHttpURL : HttpURL;
-        SendCommandRequest newCommand = new SendCommandRequest();
-        newCommand.command = "draw_change_color";
-        newCommand.key = "color";
-        newCommand.val = _color;
-        StartCoroutine(SyncRequest(url + "/v2/bc/set", JsonUtility.ToJson(newCommand), this.mEnv == ConnectionEnv.EProduction ? this.mProductionToken : this.cyaPlayer.token));
-    }
-
     // Draw sync
     public void SyncDrawing(DrawingController.DrawingModes _mode, List<Vector2> _points, string _color)
     {
@@ -269,7 +254,7 @@ public class WSConnectionController : Singleton<WSConnectionController>
         {
             return;
         }
-        if (_payload.key != "lines" && _payload.key != "cleanup" && _payload.key != "color")
+        if (_payload.key != "lines" && _payload.key != "cleanup")
         {
             Debug.Log("Wrong key");
             return;
@@ -305,9 +290,6 @@ public class WSConnectionController : Singleton<WSConnectionController>
                 break;
             case "draw_clean":
                 DrawingController.Instance.SyncCleanUp();
-                break;
-            case "draw_change_color":
-                DrawingController.Instance.SyncColor(_payload.val);
                 break;
             default:
                 Debug.Log("Invalid command");
