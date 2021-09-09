@@ -1,11 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 using WebSocketSharp;
 
 public class WSConnectionController : Singleton<WSConnectionController>
@@ -244,7 +241,7 @@ public class WSConnectionController : Singleton<WSConnectionController>
     }
 
     // Draw sync
-    public void SyncDrawing(DrawingController.DrawingModes _mode, List<Vector2> _points)
+    public void SyncDrawing(DrawingController.DrawingModes _mode, List<Vector2> _points, string _color)
     {
         if (_mode != DrawingController.DrawingModes.EDRAW_CREATE)
         {
@@ -254,7 +251,9 @@ public class WSConnectionController : Singleton<WSConnectionController>
         string url = this.mEnv == ConnectionEnv.EDev ? DevHttpURL : HttpURL;
         SendCommandRequest newCommand = new SendCommandRequest();
         newCommand.command = "draw_create";
-        newCommand.key = "coordinates";
+        newCommand.key = "lines";
+        newCommand.val = "[" + _color + "]";
+
         foreach (Vector2 point in _points)
         {
             newCommand.val += "[" + point.x + "," + point.y + "]";
@@ -270,14 +269,15 @@ public class WSConnectionController : Singleton<WSConnectionController>
         {
             return;
         }
-        if (_payload.key != "coordinates" && _payload.key != "cleanup" && _payload.key != "color")
+        if (_payload.key != "lines" && _payload.key != "cleanup" && _payload.key != "color")
         {
             Debug.Log("Wrong key");
             return;
         }
 
+        string colorString = string.Empty;
         List<Vector2> points = new List<Vector2>();
-        if (_payload.key == "coordinates")
+        if (_payload.key == "lines")
         {
             string[] coordinates = _payload.val.Split('[', ']');
             foreach (string coordinate in coordinates)
@@ -286,15 +286,22 @@ public class WSConnectionController : Singleton<WSConnectionController>
                 {
                     continue;
                 }
-                string[] pointString = coordinate.Split(',');
-                points.Add(new Vector2(System.Convert.ToSingle(pointString[0]), System.Convert.ToSingle(pointString[1])));
+                if (coordinate.Contains(','))
+                {
+                    string[] pointString = coordinate.Split(',');
+                    points.Add(new Vector2(System.Convert.ToSingle(pointString[0]), System.Convert.ToSingle(pointString[1])));
+                }
+                else
+                {
+                    colorString = coordinate;
+                }
             }
         }
 
         switch (_payload.command)
         {
             case "draw_create":
-                DrawingController.Instance.SyncCreateLine(points);
+                DrawingController.Instance.SyncCreateLine(points, colorString);
                 break;
             case "draw_clean":
                 DrawingController.Instance.SyncCleanUp();

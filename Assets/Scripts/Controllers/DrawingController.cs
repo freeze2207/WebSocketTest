@@ -26,6 +26,7 @@ public class DrawingController : Singleton<DrawingController>
     private bool mCanDraw = false;
     private GameObject mCurrentLine;
     private LineRenderer mLineRenderer;
+    private string mCurrentColor;
     private List<Vector2> mCurrentLinePoints = new List<Vector2>();
     private List<GameObject> mAllExistingLines = new List<GameObject>();
 
@@ -33,6 +34,7 @@ public class DrawingController : Singleton<DrawingController>
     void Start()
     {
         this.mCanDraw = (GameplayController.Instance.GetCurrentGameState() == GameplayController.GameStates.EGAME_DRAW) && (WSConnectionController.Instance.GetConnectionStatus());
+        this.mCurrentColor = this.ColorDropDown.options[0].text;
         this.ClearBtn.onClick.AddListener(CleanUpLines);
         this.ColorDropDown.onValueChanged.AddListener(delegate { this.ColorChanged(this.ColorDropDown); });
 
@@ -77,7 +79,7 @@ public class DrawingController : Singleton<DrawingController>
         // release the left click mouse
         if (Input.GetMouseButtonUp(0))
         {
-            WSConnectionController.Instance.SyncDrawing(DrawingModes.EDRAW_CREATE, this.mCurrentLinePoints);
+            WSConnectionController.Instance.SyncDrawing(DrawingModes.EDRAW_CREATE, this.mCurrentLinePoints, this.mCurrentColor);
         }
         
     }
@@ -88,10 +90,12 @@ public class DrawingController : Singleton<DrawingController>
         if (this.mColorMatList[change.value] != null)
         {
             this.mLinePrefab.GetComponent<LineRenderer>().material = this.mColorMatList[change.value];
+            this.mCurrentColor = change.options[change.value].text;
         }
 
+
         // Send color changed sync
-        WSConnectionController.Instance.SyncColor(DrawingModes.EDRAW_CHANGECOLOR, change.options[change.value].text);
+        //WSConnectionController.Instance.SyncColor(DrawingModes.EDRAW_CHANGECOLOR, change.options[change.value].text);
     }
 
     private void CreateLine()
@@ -130,8 +134,14 @@ public class DrawingController : Singleton<DrawingController>
         WSConnectionController.Instance.SyncDrawing(DrawingModes.EDRAW_CLEAN);
     }
 
-    public void SyncCreateLine(List<Vector2> _points)
+    public void SyncCreateLine(List<Vector2> _points, string _color)
     {
+        int index = this.ColorDropDown.options.FindIndex(x => x.text.Equals(_color));
+        if (index != -1)
+        {
+            this.mLinePrefab.GetComponent<LineRenderer>().material = this.mColorMatList[index];
+        }
+
         this.mCurrentLine = GameObject.Instantiate(mLinePrefab, Vector3.zero, Quaternion.identity);
         this.mLineRenderer = mCurrentLine.GetComponent<LineRenderer>();
         this.mAllExistingLines.Add(this.mCurrentLine);
