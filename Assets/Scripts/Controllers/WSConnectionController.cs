@@ -67,9 +67,9 @@ public class WSConnectionController : Singleton<WSConnectionController>
     }
 
     // CONST
-    private const string DevHttpURL = "https://open.cyalive.co";
+    private const string DevHttpURL = "https://open.cya.live";
     private const string HttpURL = "https://open.cya.live";
-    private const string SocketURL = "wss://opensocket.cyalive.co";
+    private const string SocketURL = "wss://opensocket.cya.live";
     
     // ENV
     public ConnectionEnv mEnv = ConnectionEnv.EDev;
